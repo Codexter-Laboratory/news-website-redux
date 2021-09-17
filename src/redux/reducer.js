@@ -14,7 +14,7 @@ const reducer = (state = article, action) => {
     {
         return {
             ...state,
-            data: [action.payload],
+            data: action.payload,
             loading: false
         }
     }

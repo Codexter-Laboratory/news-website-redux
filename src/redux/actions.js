@@ -20,7 +20,6 @@ export const getNews = async (dispatch) => {
             },
         });
     } catch (error) {
-
         dispatch({
             type: FETCH_ARTICLES_FAILED,
         });
