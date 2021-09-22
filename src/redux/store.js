@@ -1,9 +1,9 @@
-import {applyMiddleware, createStore} from 'redux';
+import {newsSlice} from "./slice";
+import {configureStore} from "@reduxjs/toolkit";
 
-import rootReducer from './rootReducer';
-import thunk from "redux-thunk";
+export const store = configureStore({
+    reducer: newsSlice.reducer,
+});
 
-
-export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 

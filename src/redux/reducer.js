@@ -2,6 +2,7 @@ import {FETCH_ARTICLES_STARTED, FETCH_ARTICLES_FAILED, FETCH_ARTICLES_SUCCESS} f
 
 const article = {
     data: [],
+    history:[],
     loading: false
 }
 const reducer = (state = article, action) => {
@@ -15,6 +16,7 @@ const reducer = (state = article, action) => {
         return {
             ...state,
             data: action.payload,
+            history:action.payload,
             loading: false
         }
     }
