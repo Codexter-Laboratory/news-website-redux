@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react'
 import {Header} from '../../components/Header/Header'
 import './index.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {fetchNewsData} from "../../redux/actions";
+import {addToHistory, fetchNewsData} from "../../redux/actions";
 import moment from "moment";
 import {Article} from "../../components/Article/Article";
 
 const Home = () => {
     const dispatch = useDispatch()
+
+
     useEffect(() => {
         dispatch(fetchNewsData())
     }, [dispatch])
@@ -15,23 +17,24 @@ const Home = () => {
     const storeData = useSelector((state) => (
         state.data
     ))
-    const historyData = useSelector((state) => (
+    let historyData = useSelector((state) => (
         state.history
     ))
-    const listItems = storeData.map((article, index) => {
+    const onArticlePress = (item) => {
+        dispatch(addToHistory(item))
+        console.log("history ", historyData)
+    }
+    const listItems = storeData.map((article) => {
         let dateTime = moment(article.publishedAt).format('MMMM Do YYYY , h:mm a');
-        const onArticlePress = () => {
-        }
         return (
             <div className='main' style={{paddingLeft: 20}}>
-                <a key={index} href={article.url} target="_blank" onClick={() => onArticlePress()}>
+                <a key={article.url} href={article.url} target="_blank" onClick={(e) => onArticlePress(article)}>
                     <Article
                         icon={article.urlToImage}
                         title={article.title}
                         author={article.author}
                         description={article.description}
                         source={article.source.name}
-                        onPress={onArticlePress}
                         dateTime={dateTime}
                     />
                 </a>

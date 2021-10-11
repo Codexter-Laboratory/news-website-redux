@@ -7,7 +7,6 @@ export const fetchNewsData = () => {
             let response = await fetch(url);
             return response.json()
         }
-
         try {
             const newsData = await fetchNews()
             dispatch(
@@ -18,11 +17,18 @@ export const fetchNewsData = () => {
         } catch (e) {
             console.log("error: ", e)
         }
-
     }
 }
-// let history = []
-//
-// export const pushHistory = (article) => {
-//     history.push(article)
-// }
+
+export const addToHistory = (item) => {
+    return async (dispatch) => {
+        try {
+            dispatch(
+                newsAction.UPDATE_HISTORY({
+                    item
+                }))
+        } catch (e) {
+            console.log("error: ", e)
+        }
+    }
+}
